@@ -1,0 +1,28 @@
+<script>
+  // Function to get UTM parameters from the URL
+  function getUTMParameter(param) {
+    var urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param) || '';  // Return the parameter value or an empty string if not found
+  }
+
+  // Function to set UTM parameters to hidden fields in the form
+  function setUTMParametersToForm() {
+    // Get UTM parameters from the URL
+    var utmSource = getUTMParameter('utm_source');
+    var utmContent = getUTMParameter('utm_content');
+    var utmMedium = getUTMParameter('utm_medium');
+    var utmCampaign = getUTMParameter('utm_campaign');
+
+    // Set UTM parameters to the form's hidden fields
+    var form = document.querySelector('form'); // Adjust this selector to target your specific form if necessary
+    if (form) {
+      form.querySelector('input[name="UTM Source"]').value = utmSource;
+      form.querySelector('input[name="UTM Content"]').value = utmContent;
+      form.querySelector('input[name="UTM Medium"]').value = utmMedium;
+      form.querySelector('input[name="UTM Campaign"]').value = utmCampaign;
+    }
+  }
+
+  // Wait for the DOM to be fully loaded before running the function
+  document.addEventListener('DOMContentLoaded', setUTMParametersToForm);
+</script>
